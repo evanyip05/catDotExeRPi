@@ -1,7 +1,48 @@
 import RPi.GPIO as GPIO
 from time import sleep
+
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(8, GPIO.OUT)
+
+
+def setOut(pin):
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(pin, GPIO.OUT)
+    
+def setIn(pin)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(pin, GPIO.IN)
+
+def pinEnable(pin):
+    GPIO.output(pin, 1);
+
+def pinDisable(pin):
+    GPIO.output(pin, 0)
+    
+def pinTempEnable(pin, time):
+    pinEnable(pin)
+    sleep(time)
+    pinDisable(pin)
+    
+def isEnabled(pin):
+    return GPIO.input(pin) > 0
+    
+def pinTempDisable(pin, time):
+    if (isEnabled(pin)):
+        pinDisable(pin)
+        sleep(time)
+        pinEnable()
+    else:
+        sleep(time)
+        
+def setAllPinsOut():
+    for i in range(40):
+        try:
+            setOut(i)
+        except:
+            print(i)
+            
+setAllPinsOut()
+    
 i = 0
 
 while i == 0:
